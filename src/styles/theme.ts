@@ -1,0 +1,118 @@
+'use client'
+import { Bellefair, Barlow_Condensed, Barlow } from 'next/font/google';
+import { createTheme } from '@mui/material/styles';
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    space: {
+      darkNavy: string
+      purple: string
+      white: string
+    }
+  }
+  interface PaletteOptions {
+    space: {
+      darkNavy: string
+      purple: string
+      white: string
+    }
+  }
+  // define type in theme
+  interface TypographyVariants {
+    heading1: React.CSSProperties
+    heading2: React.CSSProperties
+    heading3: React.CSSProperties
+    heading4: React.CSSProperties
+    heading5: React.CSSProperties
+    subheading1: React.CSSProperties
+    subheading2: React.CSSProperties
+    nav: React.CSSProperties
+    body: React.CSSProperties
+  }
+  // allow configuration type in createTheme
+  interface TypographyVariantsOptions {
+    heading1?: React.CSSProperties
+    heading2?: React.CSSProperties
+    heading3?: React.CSSProperties
+    heading4?: React.CSSProperties
+    heading5?: React.CSSProperties
+    subheading1?: React.CSSProperties
+    subheading2?: React.CSSProperties
+    navtext?: React.CSSProperties
+    bodytext?: React.CSSProperties
+  }
+}
+
+// update type in variant
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    heading1: true
+    heading2: true
+    heading3: true
+    heading4: true
+    heading5: true
+    subheading1: true
+    subheading2: true
+    navtext: true
+    bodytext: true
+  }
+}
+
+const bellefair = Bellefair({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const barlow = Barlow({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const barlowCondensed = Barlow_Condensed({
+  weight: ['400'],
+  style: ['normal'],
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const theme = createTheme({
+  palette: {
+    space: {
+      darkNavy: '#0B0D17',
+      purple: '#D0D6F9',
+      white: '#FFFFFF',
+    }
+  },
+  typography: {
+    fontFamily: bellefair.style.fontFamily,
+    heading1: { fontSize: '150px' },
+    heading2: { fontSize: '100px' },
+    heading3: { fontSize: '56px' },
+    heading4: { fontSize: '32px' },
+    heading5: {
+      fontSize: '28px',
+      letterSpacing: '4.75px',
+    },
+    subheading1: { fontSize: '28px' },
+    subheading2: {
+      fontFamily: barlowCondensed.style.fontFamily,
+      fontSize: '14px',
+      letterSpacing: '2.35px',
+    },
+    navtext: {
+      fontFamily: barlowCondensed.style.fontFamily,
+      fontSize: '16px',
+      letterSpacing: '2.7px',
+    },
+    bodytext: {
+      fontFamily: barlow.style.fontFamily,
+      fontSize: '18px',
+    },
+  },
+})
+
+export default theme
