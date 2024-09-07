@@ -1,6 +1,7 @@
 'use client'
 import { Bellefair, Barlow_Condensed, Barlow } from 'next/font/google';
 import { createTheme } from '@mui/material/styles';
+import React from 'react';
 
 declare module '@mui/material/styles' {
   interface Palette {
