@@ -29,10 +29,14 @@ export default function Home() {
             width: '50%'
           },
           [theme.breakpoints.up('md')]: {
-            alignItems: 'flex-start',
             position: 'absolute',
+            alignItems: 'flex-start',
+            textAlign: 'start',
             width: '30%',
             bottom: 0,
+            left: 120,
+          },
+          [theme.breakpoints.up('lg')]: {
             left: 165,
           },
         }}
@@ -59,13 +63,12 @@ export default function Home() {
             width: { xs: 150, sm: 242, md: 274 },
             height: { xs: 150, sm: 242, md: 274 },
             position: 'absolute',
-            // [theme.breakpoints.up('xs')]: {
-            //   bottom: 0,
-            //   right: 165,
-            // },
             [theme.breakpoints.up('md')]: {
               position: 'absolute',
               bottom: 0,
+              right: 120,
+            },
+            [theme.breakpoints.up('lg')]: {
               right: 165,
             },
             '&:hover': {

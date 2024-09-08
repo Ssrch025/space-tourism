@@ -32,6 +32,7 @@ const Navbar = () => {
     const theme = useTheme()
     const xs = theme.breakpoints.down('xs')
     const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+    const isSmUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'))
 
     const [selectedItem, setSelectedItem] = useState<string>('home')
 
@@ -60,7 +61,7 @@ const Navbar = () => {
                     height={xs ? 40 : 48}
                 />
             </Box>
-            <Box
+            {isSmUp && <Box
                 sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.1)',
                     backdropFilter: 'blur(20px)',
@@ -104,7 +105,7 @@ const Navbar = () => {
                         )
                     })}
                 </Stack>
-            </Box>
+            </Box>}
         </Stack>
     )
 }
