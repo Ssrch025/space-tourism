@@ -1,7 +1,13 @@
 'use client'
-import { Box, Button, Stack, Typography } from '@mui/material'
-import Image from 'next/image'
 import React, { useState } from 'react'
+
+import Image from 'next/image'
+
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import { Theme, useMediaQuery, useTheme } from '@mui/material'
 
 const menus = [
     {
@@ -23,7 +29,11 @@ const menus = [
 ]
 
 const Navbar = () => {
-    const [selectedItem, setSelectedItem] = useState<string>('')
+    const theme = useTheme()
+    const xs = theme.breakpoints.down('xs')
+    const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
+
+    const [selectedItem, setSelectedItem] = useState<string>('home')
 
     const handleClick = (e: any) => {
         const value = e.currentTarget.value
@@ -42,22 +52,23 @@ const Navbar = () => {
 
     return (
         <Stack direction='row' justifyContent='space-between' alignItems='center'>
-            <Box paddingX='55px'>
+            <Box paddingLeft={{ xs: '24px', sm: '39px', md: '55px' }}>
                 <Image
                     alt='navbar-icon'
                     src={'/assets/shared/logo.svg'}
-                    width={48}
-                    height={48}
+                    width={xs ? 40 : 48}
+                    height={xs ? 40 : 48}
                 />
             </Box>
-            <Box sx={{
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                paddingLeft: '120px',
-                paddingRight: '170px',
-            }}
+            <Box
+                sx={{
+                    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    backdropFilter: 'blur(20px)',
+                    paddingLeft: { xs: 5, md: 15 },
+                    paddingRight: { xs: 5, md: 22 },
+                }}
             >
-                <Stack direction='row' spacing={6} >
+                <Stack direction='row' spacing={{ sm: 4, md: 6 }} >
                     {menus.map((item, index) => {
                         const menuId = `0${index}`
                         return (
@@ -67,8 +78,8 @@ const Navbar = () => {
                                 value={item.id}
                                 sx={{
                                     color: 'space.white',
-                                    paddingY: '25px',
-                                    borderRadius: '0px',
+                                    paddingY: 4,
+                                    borderRadius: 0,
                                     borderBottom: `3px solid ${setSelectedColor(item.id, 'normal')}`,
                                     pointerEvents: 'auto',
                                     '&:hover': {
@@ -79,12 +90,12 @@ const Navbar = () => {
                             >
                                 <Stack
                                     direction='row'
-                                    spacing={2}
+                                    spacing={1}
                                     sx={{ pointerEvents: 'none' }}
                                 >
-                                    <Typography variant='subheading2' fontWeight='bold'>
+                                    {isMdUp && <Typography variant='subheading2' fontWeight='bold'>
                                         {menuId}
-                                    </Typography>
+                                    </Typography>}
                                     <Typography variant='subheading2'>
                                         {item.id}
                                     </Typography>

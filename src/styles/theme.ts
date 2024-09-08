@@ -1,9 +1,10 @@
 'use client'
 import { Bellefair, Barlow_Condensed, Barlow } from 'next/font/google';
-import { createTheme } from '@mui/material/styles';
+import { Breakpoint, createTheme } from '@mui/material/styles';
 import React from 'react';
 
 declare module '@mui/material/styles' {
+
   interface Palette {
     space: {
       darkNavy: string
@@ -11,6 +12,7 @@ declare module '@mui/material/styles' {
       white: string
     }
   }
+
   interface PaletteOptions {
     space: {
       darkNavy: string
@@ -18,18 +20,30 @@ declare module '@mui/material/styles' {
       white: string
     }
   }
+
+  interface ResponsiveTypographyProperties {
+    xs?: React.CSSProperties
+    sm?: React.CSSProperties
+    md?: React.CSSProperties
+    lg?: React.CSSProperties
+    xl?: React.CSSProperties
+  }
+
+  type TresponsiveTypography = React.CSSProperties | ResponsiveTypographyProperties
+
   // define type in theme
   interface TypographyVariants {
-    heading1: React.CSSProperties
-    heading2: React.CSSProperties
-    heading3: React.CSSProperties
-    heading4: React.CSSProperties
-    heading5: React.CSSProperties
-    subheading1: React.CSSProperties
-    subheading2: React.CSSProperties
-    nav: React.CSSProperties
-    body: React.CSSProperties
+    heading1: TresponsiveTypography
+    heading2: TresponsiveTypography
+    heading3: TresponsiveTypography
+    heading4: TresponsiveTypography
+    heading5: TresponsiveTypography
+    subheading1: TresponsiveTypography
+    subheading2: TresponsiveTypography
+    nav: TresponsiveTypography
+    body: TresponsiveTypography
   }
+
   // allow configuration type in createTheme
   interface TypographyVariantsOptions {
     heading1?: React.CSSProperties
@@ -42,6 +56,17 @@ declare module '@mui/material/styles' {
     navtext?: React.CSSProperties
     bodytext?: React.CSSProperties
   }
+}
+
+const getResponsiveSize = (xs: number, sm: number, md: number): any => {
+  const theme = createTheme()
+  const sizes = [{ key: 'xs', size: xs }, { key: 'sm', size: md }, { key: 'md', size: md }]
+  return sizes.reduce((prev, curr) => {
+    return {
+      ...prev,
+      [theme.breakpoints.up(curr.key as Breakpoint)]: { fontSize: `${curr.size}px` }
+    }
+  }, {})
 }
 
 // update type in variant
@@ -90,12 +115,13 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: bellefair.style.fontFamily,
-    heading1: { fontSize: '150px' },
+    heading1: getResponsiveSize(80, 150, 150),
     heading2: { fontSize: '100px' },
     heading3: { fontSize: '56px' },
     heading4: { fontSize: '32px' },
     heading5: {
-      fontSize: '28px',
+      fontFamily: barlowCondensed.style.fontFamily,
+      fontSize: getResponsiveSize(19, 20, 28),
       letterSpacing: '4.75px',
     },
     subheading1: { fontSize: '28px' },
@@ -106,12 +132,12 @@ const theme = createTheme({
     },
     navtext: {
       fontFamily: barlowCondensed.style.fontFamily,
-      fontSize: '16px',
+      fontSize: getResponsiveSize(14, 14, 16),
       letterSpacing: '2.7px',
     },
     bodytext: {
       fontFamily: barlow.style.fontFamily,
-      fontSize: '18px',
+      fontSize: getResponsiveSize(15, 16, 18),
     },
   },
 })
