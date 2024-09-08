@@ -40,8 +40,8 @@ declare module '@mui/material/styles' {
     heading5: TresponsiveTypography
     subheading1: TresponsiveTypography
     subheading2: TresponsiveTypography
-    nav: TresponsiveTypography
-    body: TresponsiveTypography
+    navtext: TresponsiveTypography
+    bodytext: TresponsiveTypography
   }
 
   // allow configuration type in createTheme

@@ -1,7 +1,8 @@
 'use client'
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import { Button, useTheme } from "@mui/material";
+import Stack from "@mui/material/Stack"
+import Button from "@mui/material/Button"
+import { useTheme } from "@mui/material/styles"
+import Typography from "@mui/material/Typography"
 
 
 export default function Home() {
@@ -11,7 +12,7 @@ export default function Home() {
       sx={{
         position: 'relative',
         width: '100%',
-        minHeight: { xs: '90vh', md: '70vh' },
+        minHeight: { xs: '85vh', md: '70vh' },
       }}
     >
       <Stack
@@ -23,7 +24,7 @@ export default function Home() {
             alignItems: 'center',
             textAlign: 'center',
             m: 'auto',
-            width: '90%'
+            width: '70%'
           },
           [theme.breakpoints.up('sm')]: {
             width: '50%'
@@ -86,5 +87,5 @@ export default function Home() {
         </Button>
       </Stack>
     </Stack>
-  );
+  )
 }
