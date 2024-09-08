@@ -53,7 +53,10 @@ const Navbar = () => {
 
     return (
         <Stack direction='row' justifyContent='space-between' alignItems='center'>
-            <Box paddingLeft={{ xs: '24px', sm: '39px', md: '55px' }}>
+            <Box
+                paddingLeft={{ xs: 3, sm: 5, md: 6.75 }}
+                paddingTop={{ xs: 3, md: 0 }}
+            >
                 <Image
                     alt='navbar-icon'
                     src={'/assets/shared/logo.svg'}
