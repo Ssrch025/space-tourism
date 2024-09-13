@@ -71,10 +71,12 @@ export default function Home() {
             },
             [theme.breakpoints.up('lg')]: {
               right: 165,
+              bottom: 35,
             },
             '&:hover': {
               bgcolor: 'rgba(255, 255, 255, 1)',
               backdropFilter: 'blur(10px)',
+              boxShadow: '0px 0px 0px 60px rgba(255, 255, 255, 0.15)'
             }
           }}
         >
