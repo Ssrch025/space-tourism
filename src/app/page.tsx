@@ -16,7 +16,6 @@ export default function Home() {
       }}
     >
       <Stack
-        spacing={1}
         sx={{
           [theme.breakpoints.up('xs')]: {
             display: 'flex',

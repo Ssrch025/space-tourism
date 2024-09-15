@@ -93,7 +93,7 @@ const Navbar = () => {
                         paddingRight: { xs: 5, md: 22 },
                     }}
                 >
-                    <Stack direction='row' spacing={{ sm: 4, md: 6 }} >
+                    <Stack direction='row'>
                         {menus.map((item, index) => {
                             const menuId = `0${index}`
                             return (
@@ -103,6 +103,7 @@ const Navbar = () => {
                                     value={item.id}
                                     sx={{
                                         color: 'space.white',
+                                        paddingX: { sm: 3, md: 4 },
                                         paddingY: 4,
                                         borderRadius: 0,
                                         borderBottom: `3px solid ${setSelectedColor(item.id, 'normal')}`,
