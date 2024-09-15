@@ -9,6 +9,7 @@ export default function Home() {
 
   return (
     <Stack
+      spacing={5}
       sx={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -66,18 +67,22 @@ export default function Home() {
           sx={{
             borderRadius: '50%',
             bgcolor: 'space.white',
-            width: { xs: 150, sm: 242, md: 274 },
-            height: { xs: 150, sm: 242, md: 274 },
+            width: { xs: 150, sm: 220, md: 270 },
+            height: { xs: 150, sm: 220, md: 270 },
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            marginBottom: 10,
             '&:hover': {
-              bgcolor: 'rgba(255, 255, 255, 1)',
-              backdropFilter: 'blur(10px)',
-              boxShadow: '0px 0px 0px 60px rgba(255, 255, 255, 0.15)',
+              bgcolor: 'rgba(200, 200, 200, 1)',
             },
-            [theme.breakpoints.down(1024)]: {
-              marginBottom: 10,
+            [theme.breakpoints.up(1024)]: {
+              marginBottom: 0,
+              '&:hover': {
+                bgcolor: 'rgba(255, 255, 255, 1)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: `0px 0px 0px 60px rgba(255, 255, 255, 0.15)`,
+              },
             },
           }}
         >
