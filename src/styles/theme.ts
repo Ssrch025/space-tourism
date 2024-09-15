@@ -118,7 +118,7 @@ const theme = createTheme({
     heading1: getResponsiveSize(80, 150, 150),
     heading2: { fontSize: '100px' },
     heading3: { fontSize: '56px' },
-    heading4: { fontSize: '32px' },
+    heading4: getResponsiveSize(20, 32, 32),
     heading5: {
       fontFamily: barlowCondensed.style.fontFamily,
       fontSize: getResponsiveSize(19, 20, 28),

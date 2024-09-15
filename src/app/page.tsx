@@ -18,8 +18,8 @@ export default function Home() {
         marginY: 'auto',
         paddingTop: 10,
         [theme.breakpoints.up(1024)]: {
+          flexDirection: 'row',
           paddingX: 15,
-          flexDirection: 'row'
         },
       }}
     >
@@ -75,6 +75,9 @@ export default function Home() {
               bgcolor: 'rgba(255, 255, 255, 1)',
               backdropFilter: 'blur(10px)',
               boxShadow: '0px 0px 0px 60px rgba(255, 255, 255, 0.15)',
+            },
+            [theme.breakpoints.down(1024)]: {
+              marginBottom: 10,
             },
           }}
         >

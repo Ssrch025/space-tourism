@@ -4,10 +4,15 @@ import { Box } from '@mui/material'
 
 const StyledLayout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <Box sx={{ position: 'relative', minHeight: '100vh', width: '100%' }}>
+        <Box sx={{ position: 'relative', width: '100%' }}>
             <Box
                 sx={{
                     position: 'absolute',
+                    // all direction is 0 to set background image cover all viewport
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
                     backgroundImage: {
                         xs: "url('/assets/home/background-home-mobile.jpg')",
                         sm: "url('/assets/home/background-home-tablet.jpg')",
@@ -15,16 +20,22 @@ const StyledLayout = ({ children }: { children: React.ReactNode }) => {
                     },
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundAttachment: 'fixed',
-                    width: '100%',
                     minHeight: '100vh',
                 }}
             />
-            <Box sx={{ position: 'absolute', width: '100%', marginTop: { xs: 0, md: 4 } }}>
-                <Navbar />
-                <div>
-                    {children}
-                </div>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative',
+                    width: '100%',
+                    minHeight: '100%',
+                }}
+            >
+                <Box sx={{ width: '100%' }}>
+                    <Navbar />
+                </Box>
+                <Box>{children}</Box>
             </Box>
         </Box>
     )
