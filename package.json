@@ -11,6 +11,9 @@
   },
   "dependencies": {
     "@emotion/cache": "^11.13.1",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^6.1.0",
     "@mui/material-nextjs": "^6.0.2",
     "lodash": "^4.17.21",
     "next": "14.2.8",
@@ -18,11 +21,11 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "@types/lodash": "^4.17.7",
     "eslint-config-next": "14.2.8",
     "typescript": "^5"
   }
