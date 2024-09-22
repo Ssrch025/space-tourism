@@ -12,6 +12,7 @@ import ListItemButton from '@mui/material/ListItemButton'
 import StyledSvgIcon from './StyledSvgIcon'
 
 import { IOptions } from '@/models/utility'
+import { useRouter } from 'next/navigation'
 
 interface IStyledDrawer {
     isOpen: boolean
@@ -21,6 +22,13 @@ interface IStyledDrawer {
 
 const StyledDrawer = (props: IStyledDrawer) => {
     const { isOpen, options, onClose } = props
+    const router = useRouter()
+
+    const handleClick = (menu: string) => {
+        menu === 'home'
+            ? router.push('/')
+            : router.push(`/${menu}`)
+    }
 
     return (
         <Drawer
@@ -38,7 +46,7 @@ const StyledDrawer = (props: IStyledDrawer) => {
                 },
             }}
         >
-            <Box role="presentation" onClick={onClose} sx={{ width: 250 }} >
+            <Box onClick={onClose} sx={{ width: 250 }} >
                 <Box
                     display='flex'
                     justifyContent='flex-end'
@@ -62,7 +70,10 @@ const StyledDrawer = (props: IStyledDrawer) => {
                         const menuId = `0${index}`
                         return (
                             <ListItem key={item.key} disablePadding>
-                                <ListItemButton sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}>
+                                <ListItemButton
+                                    onClick={() => handleClick(item.value)}
+                                    sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
+                                >
                                     <Stack
                                         direction='row'
                                         spacing={1}

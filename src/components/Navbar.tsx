@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import Box from '@mui/material/Box'
@@ -13,6 +13,7 @@ import StyledSvgIcon from './StyledSvgIcon'
 import StyledDrawer from './StyledDrawer'
 
 import { IOptions } from '@/models/utility'
+import { useRouter } from 'next/navigation'
 
 const menus = [
     {
@@ -41,27 +42,44 @@ const options: IOptions[] = menus.map((item) => ({
 
 const Navbar = () => {
     const theme = useTheme()
+    const router = useRouter()
     const xs = theme.breakpoints.down('xs')
     const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
     const isSmUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'))
 
-    const [selectedItem, setSelectedItem] = useState<string>('home')
+    const [selectedMenu, setSelectedMenu] = useState<string>('home')
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const handleClick = (e: any) => {
         const value = e.currentTarget.value
         e.stopPropagation()
-        setSelectedItem(value)
+        setSelectedMenu(value)
+        value === 'home'
+            ? router.push('/')
+            : router.push(`/${value}`)
     }
 
     const setSelectedColor = (menuId: string, type: 'normal' | 'hover') => {
         const isHover = type === 'hover'
-        if (selectedItem === menuId) {
+        if (selectedMenu === menuId) {
             return 'rgba(255, 255, 255, 1)'
         } else {
             return isHover ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0)'
         }
     }
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const menu = sessionStorage.getItem('menu') ?? 'home'
+            setSelectedMenu(menu)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            sessionStorage.setItem('menu', selectedMenu)
+        }
+    }, [selectedMenu])
 
     return (
         <Stack

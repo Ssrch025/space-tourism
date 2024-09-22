@@ -64,6 +64,7 @@ export default function Home() {
       >
         <Button
           variant="contained"
+          // onClick={() => router.push('/destination')}
           sx={{
             borderRadius: '50%',
             bgcolor: 'space.white',
