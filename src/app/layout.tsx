@@ -5,7 +5,7 @@ import theme from "@/styles/theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
-import StyledLayout from "@/components/StyledLayout";
+import StyledBackgroundLayout from "@/components/StyledBackgroundLayout";
 
 export const metadata: Metadata = {
   title: "Space Tourism",
@@ -24,9 +24,9 @@ export default function RootLayout({
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <StyledLayout>
+              <StyledBackgroundLayout>
                 {children}
-              </StyledLayout>
+              </StyledBackgroundLayout>
             </ThemeProvider>
           </AppRouterCacheProvider>
         </React.StrictMode>

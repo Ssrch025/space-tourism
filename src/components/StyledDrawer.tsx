@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import ListItemButton from '@mui/material/ListItemButton'
 
-import StyledSvgIcon from './StyledSvgIcon'
+import StyledImage from './StyledImage'
 
 import { IOptions } from '@/models/utility'
 import { useRouter } from 'next/navigation'
@@ -57,7 +57,7 @@ const StyledDrawer = (props: IStyledDrawer) => {
                         onClick={onClose}
                         sx={{ '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' } }}
                     >
-                        <StyledSvgIcon
+                        <StyledImage
                             idName='close'
                             src='/assets/shared/icon-close.svg'
                             width={19}

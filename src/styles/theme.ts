@@ -10,6 +10,7 @@ declare module '@mui/material/styles' {
       darkNavy: string
       purple: string
       white: string
+      border: string
     }
   }
 
@@ -18,6 +19,7 @@ declare module '@mui/material/styles' {
       darkNavy: string
       purple: string
       white: string
+      border: string
     }
   }
 
@@ -58,9 +60,13 @@ declare module '@mui/material/styles' {
   }
 }
 
-const getResponsiveSize = (xs: number, sm: number, md: number): any => {
+const getResponsiveSize = (xs: number, sm?: number, md?: number): any => {
   const theme = createTheme()
-  const sizes = [{ key: 'xs', size: xs }, { key: 'sm', size: md }, { key: 'md', size: md }]
+  const sizes = [
+    { key: 'xs', size: xs },
+    { key: 'sm', size: sm ?? xs },
+    { key: 'md', size: md ?? xs },
+  ]
   return sizes.reduce((prev, curr) => {
     return {
       ...prev,
@@ -111,20 +117,21 @@ const theme = createTheme({
       darkNavy: '#0B0D17',
       purple: '#D0D6F9',
       white: '#FFFFFF',
+      border: '#383B4B',
     }
   },
   typography: {
     fontFamily: bellefair.style.fontFamily,
     heading1: getResponsiveSize(80, 150, 150),
     heading2: { fontSize: '100px' },
-    heading3: { fontSize: '56px' },
+    heading3: getResponsiveSize(56, 80, 100),
     heading4: getResponsiveSize(20, 32, 32),
     heading5: {
       fontFamily: barlowCondensed.style.fontFamily,
       fontSize: getResponsiveSize(19, 20, 28),
       letterSpacing: '4.75px',
     },
-    subheading1: { fontSize: '28px' },
+    subheading1: getResponsiveSize(28),
     subheading2: {
       fontFamily: barlowCondensed.style.fontFamily,
       fontSize: '14px',

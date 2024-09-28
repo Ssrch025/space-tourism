@@ -3,51 +3,51 @@ import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
-import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
 import { Theme, useMediaQuery, useTheme } from '@mui/material'
 
-import StyledSvgIcon from './StyledSvgIcon'
+import StyledImage from './StyledImage'
 import StyledDrawer from './StyledDrawer'
 
 import { IOptions } from '@/models/utility'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import StyledTab from './StyledTab'
 
 const menus = [
     {
-        id: 'home',
+        key: 'home',
         path: '/home',
     },
     {
-        id: 'destination',
+        key: 'destination',
         path: '/destination',
     },
     {
-        id: 'crew',
+        key: 'crew',
         path: '/crew'
     },
     {
-        id: 'technology',
+        key: 'technology',
         path: '/technology'
     },
 ]
 
 const options: IOptions[] = menus.map((item) => ({
-    key: item.id.toUpperCase(),
-    value: item.id,
+    key: item.key.toUpperCase(),
+    value: item.key,
     path: item.path,
 }))
 
 const Navbar = () => {
     const theme = useTheme()
     const router = useRouter()
+    const pathname = usePathname().replace('/', '')
+    const validatePathname = !pathname ? 'home' : pathname
     const xs = theme.breakpoints.down('xs')
-    const isMdUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'))
     const isSmUp = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'))
 
-    const [selectedMenu, setSelectedMenu] = useState<string>('home')
+    const [selectedMenu, setSelectedMenu] = useState<string>(validatePathname)
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
     const handleClick = (e: any) => {
@@ -59,27 +59,9 @@ const Navbar = () => {
             : router.push(`/${value}`)
     }
 
-    const setSelectedColor = (menuId: string, type: 'normal' | 'hover') => {
-        const isHover = type === 'hover'
-        if (selectedMenu === menuId) {
-            return 'rgba(255, 255, 255, 1)'
-        } else {
-            return isHover ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0)'
-        }
-    }
-
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const menu = sessionStorage.getItem('menu') ?? 'home'
-            setSelectedMenu(menu)
-        }
-    }, [])
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            sessionStorage.setItem('menu', selectedMenu)
-        }
-    }, [selectedMenu])
+        setSelectedMenu(validatePathname)
+    }, [validatePathname])
 
     return (
         <Stack
@@ -111,43 +93,13 @@ const Navbar = () => {
                         paddingRight: { xs: 5, md: 22 },
                     }}
                 >
-                    <Stack direction='row'>
-                        {menus.map((item, index) => {
-                            const menuId = `0${index}`
-                            return (
-                                <Button
-                                    key={item.id}
-                                    variant='text'
-                                    value={item.id}
-                                    sx={{
-                                        color: 'space.white',
-                                        paddingX: { sm: 3, md: 4 },
-                                        paddingY: 4,
-                                        borderRadius: 0,
-                                        borderBottom: `3px solid ${setSelectedColor(item.id, 'normal')}`,
-                                        pointerEvents: 'auto',
-                                        '&:hover': {
-                                            borderBottom: `3px solid ${setSelectedColor(item.id, 'hover')}`,
-                                        }
-                                    }}
-                                    onClick={handleClick}
-                                >
-                                    <Stack
-                                        direction='row'
-                                        spacing={1}
-                                        sx={{ pointerEvents: 'none' }}
-                                    >
-                                        {isMdUp && <Typography variant='subheading2' fontWeight='bold'>
-                                            {menuId}
-                                        </Typography>}
-                                        <Typography variant='subheading2'>
-                                            {item.id.toUpperCase()}
-                                        </Typography>
-                                    </Stack>
-                                </Button>
-                            )
-                        })}
-                    </Stack>
+                    <StyledTab
+                        hasId
+                        type='navbar'
+                        tabs={menus.map((item) => item.key)}
+                        selectedMenu={selectedMenu}
+                        handleClick={handleClick}
+                    />
                 </Box>
                 : <IconButton
                     onClick={() => setIsOpen(true)}
@@ -156,7 +108,7 @@ const Navbar = () => {
                         '&:hover': { bgcolor: 'rgba(255, 255, 255, 0.1)' }
                     }}
                 >
-                    <StyledSvgIcon
+                    <StyledImage
                         idName='hamburger-menu'
                         src='/assets/shared/icon-hamburger.svg'
                         width={24}

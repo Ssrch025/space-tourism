@@ -3,8 +3,9 @@ import Typography from '@mui/material/Typography'
 import Stack from '@mui/material/Stack'
 import { usePathname } from 'next/navigation'
 import React from 'react'
+import Box from '@mui/material/Box'
 
-const TitleLayout = () => {
+const TitleLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname().replace('/', '')
 
     const topic = [
@@ -26,13 +27,14 @@ const TitleLayout = () => {
 
     return (
         <Stack
-            spacing={8}
+            spacing={4}
             sx={{
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: 'center',
+                alignItems: {xs: 'center', sm: 'flex-start'},
                 mt: 9,
+                mb: 7.25,
             }}
         >
             <Stack direction='row' spacing={2}>
@@ -43,6 +45,9 @@ const TitleLayout = () => {
                     {topic?.name.toUpperCase()}
                 </Typography>
             </Stack>
+            <Box>
+                {children}
+            </Box>
         </Stack>
     )
 }
