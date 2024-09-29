@@ -32,12 +32,17 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'center',
-                alignItems: {xs: 'center', sm: 'flex-start'},
+                alignItems: { xs: 'center', sm: 'flex-start' },
                 mt: 9,
-                mb: 7.25,
+                mb: { xs: 7.25, sm: 0 },
+                px: { xs: 2, md: 20 }
             }}
         >
-            <Stack direction='row' spacing={2}>
+            <Stack
+                direction='row'
+                spacing={2}
+                pl={{ xs: 0, sm: 6, md: 7.75 }}
+            >
                 <Typography variant='heading5' fontWeight='bold' color='grey'>
                     {`0${topic?.order}`}
                 </Typography>
@@ -45,7 +50,7 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                     {topic?.name.toUpperCase()}
                 </Typography>
             </Stack>
-            <Box>
+            <Box sx={{ width: '100%' }}>
                 {children}
             </Box>
         </Stack>

@@ -4,10 +4,13 @@ import Stack from '@mui/material/Stack'
 import StyledImage from '@/components/StyledImage'
 import Typography from '@mui/material/Typography'
 import StyledTab from '@/components/StyledTab'
-import { Box, Divider } from '@mui/material'
+import { Box, Divider, useMediaQuery, useTheme } from '@mui/material'
 
 const Destination = () => {
   const [star, setStar] = useState<string>('moon')
+  const theme = useTheme()
+  const isSm = useMediaQuery(theme.breakpoints.up('sm'))
+  const isMd = useMediaQuery(theme.breakpoints.up('md'))
 
   const stars = [
     {
@@ -48,42 +51,66 @@ const Destination = () => {
 
   const findStar = stars.find((item) => item.name === star)
 
+  const responsiveSize = () => {
+    if (isSm) {
+      return 300
+    } else if (isMd) {
+      return 450
+    } else {
+      return 170
+    }
+  }
+
   return (
-    <Stack spacing={4} sx={{ alignItems: 'center' }} >
+    <Stack
+      direction={{ md: 'row' }}
+      sx={{
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        mx: { sm: 12 }
+      }}
+    >
       <StyledImage
         idName={`${findStar?.name}-image`}
         src={`/assets/destination/image-${findStar?.name}.png`}
         width={170}
+        responsiveSize={responsiveSize}
       />
-      <StyledTab
-        type='tab'
-        tabs={stars.map((item) => item.name)}
-        selectedMenu={star}
-        handleClick={(e) => setStar(e.currentTarget.value)}
+      <Stack
+        spacing={3}
         sx={{
-          paddingX: 0.5,
-          paddingY: 1,
-          // color: findStar?.name === star ? 'space.white' :'space.purple',
+          justifyContent: 'center',
+          alignItems: { xs: 'center', md: 'flex-start' },
+          width: { md: '50%' },
         }}
-      />
-      <Typography variant='heading3' color='space.white'>
-        {findStar?.name.toUpperCase()}
-      </Typography>
-      <Box
-        textAlign='center'
-        px={4}
       >
-        <Typography variant='bodytext' color='space.purple'>
-          {findStar?.description}
+        <StyledTab
+          type='tab'
+          tabs={stars.map((item) => item.name)}
+          selectedMenu={star}
+          handleClick={(e) => setStar(e.currentTarget.value)}
+          sx={{
+            paddingX: 0.5,
+            paddingY: 1,
+            mt: 4,
+          }}
+        />
+        <Typography variant='heading3' color='space.white'>
+          {findStar?.name.toUpperCase()}
         </Typography>
-      </Box>
-      <Box width={'100%'}>
-        <Divider variant='middle' sx={{ borderColor: 'space.border' }} />
-      </Box>
-      <StarDetail
-        avgDistance={findStar?.avgDistance ?? ''}
-        travelTime={findStar?.travelTime ?? ''}
-      />
+        <Box textAlign={{ xs: 'center', md: 'start' }} width={{ md: '70%' }} >
+          <Typography variant='bodytext' color='space.purple'>
+            {findStar?.description}
+          </Typography>
+        </Box>
+        <Box width={{ xs: '100%', md: '70%' }}>
+          <Divider sx={{ borderColor: 'space.border' }} />
+        </Box>
+        <StarDetail
+          avgDistance={findStar?.avgDistance ?? ''}
+          travelTime={findStar?.travelTime ?? ''}
+        />
+      </Stack>
     </Stack>
   )
 }
@@ -109,10 +136,17 @@ const StarDetail = (props: IStarDetail) => {
     },
   ]
   return (
-    <Stack spacing={3} textAlign='center'>
+    <Stack
+      spacing={{ xs: 4, sm: 10 }}
+      direction={{ sm: 'row' }}
+      textAlign='center'
+    >
       {contents.map((item) => {
         return (
-          <Stack key={item.topic} spacing={1.5}>
+          <Stack
+            key={item.topic}
+            spacing={1.5}
+          >
             <Typography variant='navtext' color='space.purple'>
               {item.topic.toUpperCase()}
             </Typography>
