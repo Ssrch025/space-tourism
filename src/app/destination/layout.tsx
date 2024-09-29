@@ -5,25 +5,25 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 import Box from '@mui/material/Box'
 
+const topics = [
+    {
+        id: 'destination',
+        name: 'pick your destination'
+    },
+    {
+        id: 'crew',
+        name: 'meet your crew',
+    },
+    {
+        id: 'technology',
+        name: 'space launch 101',
+    },
+].map((item, index) => ({ order: index + 1, ...item }))
+
+
 const TitleLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname().replace('/', '')
-
-    const topic = [
-        {
-            id: 'destination',
-            name: 'pick your destination'
-        },
-        {
-            id: 'crew',
-            name: 'meet your crew',
-        },
-        {
-            id: 'technology',
-            name: 'space launch 101',
-        },
-    ]
-        .map((item, index) => ({ order: index + 1, ...item }))
-        .find((item) => item.id === pathname)
+    const selectedMenu = topics.find((item) => item.id === pathname)
 
     return (
         <Stack
@@ -33,9 +33,9 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: { xs: 'center', sm: 'flex-start' },
-                mt: 9,
-                mb: { xs: 7.25, sm: 0 },
-                px: { xs: 2, md: 20 }
+                my: 9,
+                mb: { lg: 0 },
+                px: { xs: 2, lg: 20 }
             }}
         >
             <Stack
@@ -44,10 +44,10 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                 pl={{ xs: 0, sm: 6, md: 7.75 }}
             >
                 <Typography variant='heading5' fontWeight='bold' color='grey'>
-                    {`0${topic?.order}`}
+                    {`0${selectedMenu?.order}`}
                 </Typography>
                 <Typography variant='heading5' color='space.white'>
-                    {topic?.name.toUpperCase()}
+                    {selectedMenu?.name.toUpperCase()}
                 </Typography>
             </Stack>
             <Box sx={{ width: '100%' }}>
