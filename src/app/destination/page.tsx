@@ -52,10 +52,10 @@ const Destination = () => {
   const findStar = stars.find((item) => item.name === star)
 
   const responsiveSize = () => {
-    if (isSm) {
-      return 300
-    } else if (isMd) {
+    if (isMd) {
       return 450
+    } else if (isSm) {
+      return 300
     } else {
       return 170
     }
@@ -65,17 +65,19 @@ const Destination = () => {
     <Stack
       direction={{ md: 'row' }}
       sx={{
-        justifyContent: 'space-between',
+        justifyContent: { xs: 'center', md: 'space-between' },
         alignItems: 'center',
         mx: { sm: 12 }
       }}
     >
-      <StyledImage
-        idName={`${findStar?.name}-image`}
-        src={`/assets/destination/image-${findStar?.name}.png`}
-        width={170}
-        responsiveSize={responsiveSize}
-      />
+      <Box mr={5}>
+        <StyledImage
+          idName={`${findStar?.name}-image`}
+          src={`/assets/destination/image-${findStar?.name}.png`}
+          width={170}
+          responsiveSize={responsiveSize}
+        />
+      </Box>
       <Stack
         spacing={3}
         sx={{
@@ -90,7 +92,7 @@ const Destination = () => {
           selectedMenu={star}
           handleClick={(e) => setStar(e.currentTarget.value)}
           sx={{
-            paddingX: 0.5,
+            paddingX: { xs: 0.5, sm: 1, md: 2 },
             paddingY: 1,
             mt: 4,
           }}
