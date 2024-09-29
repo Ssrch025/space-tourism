@@ -1,8 +1,13 @@
+'use client'
 import React from 'react'
 import Navbar from './Navbar'
-import { Box } from '@mui/material'
+import Box from '@mui/material/Box'
+import { usePathname } from 'next/navigation'
 
-const StyledLayout = ({ children }: { children: React.ReactNode }) => {
+const StyledBackgroundLayout = ({ children }: { children: React.ReactNode }) => {
+    const pathname = usePathname().replace('/', '')
+    const validatePathname = !pathname ? 'home' : pathname
+
     return (
         <Box sx={{ position: 'relative', width: '100%' }}>
             <Box
@@ -14,9 +19,9 @@ const StyledLayout = ({ children }: { children: React.ReactNode }) => {
                     right: 0,
                     bottom: 0,
                     backgroundImage: {
-                        xs: "url('/assets/home/background-home-mobile.jpg')",
-                        sm: "url('/assets/home/background-home-tablet.jpg')",
-                        md: "url('/assets/home/background-home-desktop.jpg')",
+                        xs: `url('/assets/${validatePathname}/background-${validatePathname}-mobile.jpg')`,
+                        sm: `url('/assets/${validatePathname}/background-${validatePathname}-tablet.jpg')`,
+                        md: `url('/assets/${validatePathname}/background-${validatePathname}-desktop.jpg')`,
                     },
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
@@ -41,4 +46,4 @@ const StyledLayout = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-export default StyledLayout
+export default StyledBackgroundLayout

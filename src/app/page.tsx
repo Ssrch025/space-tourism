@@ -3,9 +3,11 @@ import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
 import { useTheme } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
+import { useRouter } from "next/navigation"
 
 export default function Home() {
   const theme = useTheme()
+  const router = useRouter()
 
   return (
     <Stack
@@ -64,6 +66,7 @@ export default function Home() {
       >
         <Button
           variant="contained"
+          onClick={() => router.push('/destination')}
           sx={{
             borderRadius: '50%',
             bgcolor: 'space.white',
