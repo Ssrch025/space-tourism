@@ -128,7 +128,7 @@ const theme = createTheme({
     heading4: getResponsiveSize(20, 32, 32),
     heading5: {
       fontFamily: barlowCondensed.style.fontFamily,
-      fontSize: getResponsiveSize(19, 20, 28),
+      ...getResponsiveSize(16, 20, 28),
       letterSpacing: '4.75px',
     },
     subheading1: getResponsiveSize(28),
@@ -139,12 +139,12 @@ const theme = createTheme({
     },
     navtext: {
       fontFamily: barlowCondensed.style.fontFamily,
-      fontSize: getResponsiveSize(14, 14, 16),
+      ...getResponsiveSize(14, 14, 16),
       letterSpacing: '2.7px',
     },
     bodytext: {
       fontFamily: barlow.style.fontFamily,
-      fontSize: getResponsiveSize(15, 16, 18),
+      ...getResponsiveSize(15, 16, 18),
     },
   },
 })
