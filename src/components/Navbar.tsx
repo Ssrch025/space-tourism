@@ -89,8 +89,12 @@ const Navbar = () => {
                     sx={{
                         backgroundColor: 'rgba(255, 255, 255, 0.1)',
                         backdropFilter: 'blur(20px)',
-                        paddingLeft: { xs: 5, md: 15 },
-                        paddingRight: { xs: 5, md: 22 },
+                        paddingLeft: 5,
+                        paddingRight: 5,
+                        [theme.breakpoints.up(1024)]: {
+                            paddingLeft: 15,
+                            paddingRight: 22,
+                        },
                     }}
                 >
                     <StyledTab
