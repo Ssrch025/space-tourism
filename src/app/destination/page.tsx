@@ -1,12 +1,12 @@
 'use client'
 import React, { useState } from 'react'
-import Stack from '@mui/material/Stack'
-import StyledImage from '@/components/StyledImage'
-import Typography from '@mui/material/Typography'
-import StyledTab from '@/components/StyledTab'
 import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
 import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
 import { useMediaQuery, useTheme } from '@mui/material'
+import StyledTab from '@/components/StyledTab'
+import StyledImage from '@/components/StyledImage'
 
 const stars = [
   {
@@ -73,6 +73,7 @@ const Destination = () => {
           justifyContent: 'space-between',
           alignItems: 'flex-start',
           textAlign: 'left',
+          mb: 10,
         },
       }}
     >
@@ -102,6 +103,9 @@ const Destination = () => {
             paddingX: { xs: 0.5, sm: 1, md: 2 },
             paddingY: 1,
             mt: 4,
+            [theme.breakpoints.up(1024)]: {
+              mt: 0,
+            },
           }}
         />
         <Typography variant='heading3' color='space.white'>

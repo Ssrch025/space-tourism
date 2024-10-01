@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
-import Navbar from './Navbar'
-import Box from '@mui/material/Box'
 import { usePathname } from 'next/navigation'
+import Navbar from './Navbar'
+import TitleLayout from './TitleLayout'
+import Box from '@mui/material/Box'
 
 const StyledBackgroundLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname().replace('/', '')
@@ -40,7 +41,9 @@ const StyledBackgroundLayout = ({ children }: { children: React.ReactNode }) => 
                 <Box sx={{ width: '100%' }}>
                     <Navbar />
                 </Box>
-                <Box>{children}</Box>
+                <TitleLayout>
+                    {children}
+                </TitleLayout>
             </Box>
         </Box>
     )

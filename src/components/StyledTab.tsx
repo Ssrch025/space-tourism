@@ -1,8 +1,8 @@
-import { SxProps, Theme, useMediaQuery } from '@mui/material'
+import React from 'react'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
-import React from 'react'
+import { SxProps, Theme, useMediaQuery } from '@mui/material'
 
 interface IStyledTab {
     tabs: string[]

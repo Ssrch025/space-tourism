@@ -1,7 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-
 import theme from "@/styles/theme";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
