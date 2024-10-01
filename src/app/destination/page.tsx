@@ -57,6 +57,8 @@ const Destination = () => {
   const theme = useTheme()
   const isSm = useMediaQuery(theme.breakpoints.up('sm'))
   const isMd = useMediaQuery(theme.breakpoints.up('md'))
+  const tabletSize = theme.breakpoints.up(768)
+  const desktopSize = theme.breakpoints.up(1024)
 
   const selectedStar = stars.find((item) => item.name === star)
   const responsiveSize = getResponsiveSize(isMd, isSm)
@@ -68,7 +70,7 @@ const Destination = () => {
         justifyContent: 'center',
         flexDirection: 'column',
         alignItems: 'center',
-        [theme.breakpoints.up(1024)]: {
+        [desktopSize]: {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'flex-start',
@@ -88,7 +90,7 @@ const Destination = () => {
         sx={{
           justifyContent: 'center',
           alignItems: 'center',
-          [theme.breakpoints.up(1024)]: {
+          [desktopSize]: {
             alignItems: 'flex-start',
             width: '50%',
           },
@@ -103,22 +105,22 @@ const Destination = () => {
             paddingX: { xs: 0.5, sm: 1, md: 2 },
             paddingY: 1,
             mt: 4,
-            [theme.breakpoints.up(1024)]: {
+            [desktopSize]: {
               mt: 0,
             },
           }}
         />
-        <Typography variant='heading3' color='space.white'>
+        <Typography variant='heading2' color='space.white'>
           {selectedStar?.name.toUpperCase()}
         </Typography>
         <Box
           sx={{
             textAlign: 'center',
             width: '100%',
-            [theme.breakpoints.up(768)]: {
+            [tabletSize]: {
               width: '70%',
             },
-            [theme.breakpoints.up(1024)]: {
+            [desktopSize]: {
               textAlign: 'start',
               width: '80%',
             },
@@ -134,12 +136,12 @@ const Destination = () => {
             [theme.breakpoints.up(768)]: {
               width: '70%',
             },
-            [theme.breakpoints.up(1024)]: {
+            [desktopSize]: {
               width: '80%',
             },
           }}
         >
-          <Divider sx={{ borderColor: 'space.border' }} />
+          <Divider sx={{ borderColor: 'space.grey' }} />
         </Box>
         <StarDetail
           avgDistance={selectedStar?.avgDistance ?? ''}
@@ -153,16 +155,28 @@ const Destination = () => {
 export default Destination
 
 const StarDetail = ({ avgDistance, travelTime }: { avgDistance: string; travelTime: string }) => {
+  const theme = useTheme()
+  const desktopSize = theme.breakpoints.up(1024)
+
   const details = [
     { topic: 'avg. distance', value: avgDistance },
     { topic: 'est. travel time', value: travelTime },
   ]
 
   return (
-    <Stack spacing={{ xs: 4, sm: 10 }} direction={{ sm: 'row' }} textAlign='center'>
+    <Stack 
+    spacing={{ xs: 4, sm: 10 }} 
+    direction={{ sm: 'row' }} 
+    sx={{
+      textAlign:'center',
+      [desktopSize]: {
+        textAlign: 'start'
+      }
+    }}
+    >
       {details.map((detail) => (
         <Stack key={detail.topic} spacing={1.5}>
-          <Typography variant='navtext' color='space.purple'>
+          <Typography variant='subheading2' color='space.purple'>
             {detail.topic.toUpperCase()}
           </Typography>
           <Typography variant='subheading1' color='space.white'>

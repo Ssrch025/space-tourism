@@ -90,7 +90,7 @@ export default function Home() {
             },
           }}
         >
-          <Typography variant="heading4" color={'space.darkNavy'}>
+          <Typography variant="button" color={'space.darkNavy'}>
             {'EXPLORE'}
           </Typography>
         </Button>

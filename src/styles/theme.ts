@@ -10,7 +10,7 @@ declare module '@mui/material/styles' {
       darkNavy: string
       purple: string
       white: string
-      border: string
+      grey: string
     }
   }
 
@@ -19,7 +19,7 @@ declare module '@mui/material/styles' {
       darkNavy: string
       purple: string
       white: string
-      border: string
+      grey: string
     }
   }
 
@@ -44,6 +44,7 @@ declare module '@mui/material/styles' {
     subheading2: TresponsiveTypography
     navtext: TresponsiveTypography
     bodytext: TresponsiveTypography
+    button: TresponsiveTypography
   }
 
   // allow configuration type in createTheme
@@ -57,6 +58,7 @@ declare module '@mui/material/styles' {
     subheading2?: React.CSSProperties
     navtext?: React.CSSProperties
     bodytext?: React.CSSProperties
+    button?: React.CSSProperties
   }
 }
 
@@ -117,15 +119,15 @@ const theme = createTheme({
       darkNavy: '#0B0D17',
       purple: '#D0D6F9',
       white: '#FFFFFF',
-      border: '#383B4B',
+      grey: '#383B4B',
     }
   },
   typography: {
     fontFamily: bellefair.style.fontFamily,
     heading1: getResponsiveSize(80, 150, 150),
-    heading2: { fontSize: '100px' },
-    heading3: getResponsiveSize(56, 80, 100),
-    heading4: getResponsiveSize(20, 32, 32),
+    heading2: getResponsiveSize(56, 80, 100),
+    heading3: getResponsiveSize(24, 40, 56),
+    heading4: getResponsiveSize(16, 24, 32),
     heading5: {
       fontFamily: barlowCondensed.style.fontFamily,
       ...getResponsiveSize(16, 20, 28),
@@ -134,7 +136,7 @@ const theme = createTheme({
     subheading1: getResponsiveSize(28),
     subheading2: {
       fontFamily: barlowCondensed.style.fontFamily,
-      fontSize: '14px',
+      ...getResponsiveSize(14),
       letterSpacing: '2.35px',
     },
     navtext: {
@@ -146,6 +148,7 @@ const theme = createTheme({
       fontFamily: barlow.style.fontFamily,
       ...getResponsiveSize(15, 16, 18),
     },
+    button: getResponsiveSize(20, 32, 32)
   },
 })
 
