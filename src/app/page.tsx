@@ -1,9 +1,10 @@
 'use client'
+import React from 'react'
+import { useRouter } from "next/navigation"
 import Stack from "@mui/material/Stack"
 import Button from "@mui/material/Button"
-import { useTheme } from "@mui/material/styles"
 import Typography from "@mui/material/Typography"
-import { useRouter } from "next/navigation"
+import { useTheme } from "@mui/material/styles"
 
 export default function Home() {
   const theme = useTheme()
@@ -89,7 +90,7 @@ export default function Home() {
             },
           }}
         >
-          <Typography variant="heading4" color={'space.darkNavy'}>
+          <Typography variant="button" color={'space.darkNavy'}>
             {'EXPLORE'}
           </Typography>
         </Button>
