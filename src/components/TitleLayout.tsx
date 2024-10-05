@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { useTheme } from '@mui/material'
 
 const topics = [
     {
@@ -22,8 +23,13 @@ const topics = [
 
 
 const TitleLayout = ({ children }: { children: React.ReactNode }) => {
+    const theme = useTheme()
+    const tabletSize = theme.breakpoints.up(768)
+    const desktopSize = theme.breakpoints.up(1024)
+
     const pathname = usePathname().replace('/', '')
     const selectedMenu = topics.find((item) => item.id === pathname)
+    const isDestinationPage = pathname === 'destination'
 
     return (
         <>
@@ -32,19 +38,27 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                 : <Stack
                     spacing={4}
                     sx={{
+                        position: 'relative',
                         width: '100%',
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: { xs: 'center', sm: 'flex-start' },
-                        my: 9,
-                        mb: { lg: 0 },
-                        px: { xs: 2, lg: 20 }
+                        mt: 9,
+                        mb: { xs: isDestinationPage ? 9 : 0, lg: 0 },
+                        px: { xs: 2, lg: 20 },
                     }}
                 >
                     <Stack
                         direction='row'
                         spacing={2}
-                        pl={{ xs: 0, sm: 6, md: 7.75 }}
+                        sx={{
+                            [tabletSize]: {
+                                pl: 6
+                            },
+                            [desktopSize]: {
+                                pl: 0
+                            }
+                        }}
                     >
                         <Typography variant='heading5' fontWeight='bold' color='grey'>
                             {`0${selectedMenu?.order}`}
@@ -53,7 +67,7 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                             {selectedMenu?.name.toUpperCase()}
                         </Typography>
                     </Stack>
-                    <Box sx={{ width: '100%' }}>
+                    <Box sx={{ position: 'relative', width: '100%' }}>
                         {children}
                     </Box>
                 </Stack>}

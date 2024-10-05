@@ -70,6 +70,9 @@ const Destination = () => {
         justifyContent: 'center',
         flexDirection: 'column',
         alignItems: 'center',
+        [tabletSize]: {
+          mt: 8,
+        },
         [desktopSize]: {
           flexDirection: 'row',
           justifyContent: 'space-between',
@@ -164,15 +167,15 @@ const StarDetail = ({ avgDistance, travelTime }: { avgDistance: string; travelTi
   ]
 
   return (
-    <Stack 
-    spacing={{ xs: 4, sm: 10 }} 
-    direction={{ sm: 'row' }} 
-    sx={{
-      textAlign:'center',
-      [desktopSize]: {
-        textAlign: 'start'
-      }
-    }}
+    <Stack
+      spacing={{ xs: 4, sm: 10 }}
+      direction={{ sm: 'row' }}
+      sx={{
+        textAlign: 'center',
+        [desktopSize]: {
+          textAlign: 'start'
+        }
+      }}
     >
       {details.map((detail) => (
         <Stack key={detail.topic} spacing={1.5}>

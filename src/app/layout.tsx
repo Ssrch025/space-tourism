@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   description: "Discovery the space",
 };
 
-const StyledBackgroundLayout = dynamic(
-  () => import("@/components/StyledBackgroundLayout"),
+const BackgroundLayout = dynamic(
+  () => import("@/components/BackgroundLayout"),
   {
     ssr: false,
   }
@@ -30,9 +30,9 @@ export default function RootLayout({
           <AppRouterCacheProvider options={{ enableCssLayer: true }}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <StyledBackgroundLayout>
+              <BackgroundLayout>
                 {children}
-              </StyledBackgroundLayout>
+              </BackgroundLayout>
             </ThemeProvider>
           </AppRouterCacheProvider>
         </React.StrictMode>

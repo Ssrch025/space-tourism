@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 import TitleLayout from './TitleLayout'
 import Box from '@mui/material/Box'
 
-const StyledBackgroundLayout = ({ children }: { children: React.ReactNode }) => {
+const BackgroundLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname().replace('/', '')
     const validatePathname = !pathname ? 'home' : pathname
 
@@ -49,4 +49,4 @@ const StyledBackgroundLayout = ({ children }: { children: React.ReactNode }) => 
     )
 }
 
-export default StyledBackgroundLayout
+export default BackgroundLayout
