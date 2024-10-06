@@ -41,7 +41,7 @@ const BackgroundLayout = ({ children }: { children: React.ReactNode }) => {
                 <Box sx={{ width: '100%' }}>
                     <Navbar />
                 </Box>
-                <TitleLayout>
+                <TitleLayout hasImage={pathname === 'technology'}>
                     {children}
                 </TitleLayout>
             </Box>
