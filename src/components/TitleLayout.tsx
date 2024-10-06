@@ -70,7 +70,7 @@ const TitleLayout = ({ children, hasImage }: { children: React.ReactNode; hasIma
                             {selectedMenu?.name.toUpperCase()}
                         </Typography>
                     </Stack>
-                    <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
+                    <Box sx={{ position: 'relative', width: '100%'}}>
                         {children}
                     </Box>
                 </Stack>}
