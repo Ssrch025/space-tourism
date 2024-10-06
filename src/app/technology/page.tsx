@@ -1,18 +1,26 @@
 'use client'
-import { Box, useTheme } from '@mui/material'
+import StyledStepper from '@/components/StyledStepper'
+import { useMediaQuery, useTheme } from '@mui/material'
+import Box from '@mui/material/Box'
 import Stack from '@mui/material/Stack'
-import Step from '@mui/material/Step'
-import StepButton from '@mui/material/StepButton'
-import Stepper from '@mui/material/Stepper'
 import Typography from '@mui/material/Typography'
 import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-const technologies = [
+interface ITechnology {
+    key: string
+    topic: string
+    landscape: string
+    portrait: string
+    description: string
+}
+
+const technologies: ITechnology[] = [
     {
         key: 'launch-vehicle',
         topic: 'Launch Vehicle',
-        image: '/assets/technology/image-launch-vehicle-landscape.jpg',
+        landscape: '/assets/technology/image-launch-vehicle-landscape.jpg',
+        portrait: '/assets/technology/image-launch-vehicle-portrait.jpg',
         description: `A launch vehicle or carrier rocket is a rocket-propelled 
         vehicle used to carry a payload from Earth's surface to space, 
         usually to Earth orbit or beyond. Our WEB-X carrier rocket is the most powerful in operation. 
@@ -21,7 +29,8 @@ const technologies = [
     {
         key: 'spaceport',
         topic: 'Spaceport',
-        image: '/assets/technology/image-spaceport-landscape.jpg',
+        landscape: '/assets/technology/image-spaceport-landscape.jpg',
+        portrait: '/assets/technology/image-spaceport-portrait.jpg',
         description: `A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, 
         by analogy to the seaport for ships or airport for aircraft. 
         Based in the famous Cape Canaveral, 
@@ -30,7 +39,8 @@ const technologies = [
     {
         key: 'space-capsule',
         topic: 'Space Capsule',
-        image: '/assets/technology/image-space-capsule-landscape.jpg',
+        landscape: '/assets/technology/image-space-capsule-landscape.jpg',
+        portrait: '/assets/technology/image-space-capsule-portrait.jpg',
         description: `A space capsule is an often-crewed spacecraft that uses a blunt-body 
         reentry capsule to reenter the Earth's atmosphere without wings. 
         Our capsule is where you'll spend your time during the flight. 
@@ -41,7 +51,30 @@ const technologies = [
 const Technology = () => {
     const [technology, setTechnology] = useState<string>('launch-vehicle')
     const theme = useTheme()
-    const selectedTech = technologies.find((item) => item.key === technology)
+    const selectedTech = technologies.find((item) => item.key === technology) as ITechnology
+    const isDesktopSize = useMediaQuery(theme.breakpoints.up(1024))
+
+    return (
+        <Box width='100%'>
+            {!isDesktopSize
+                ? <TechnologyMobileSize selectedTech={selectedTech} setTechnology={setTechnology} />
+                : <TechnologyDesktopSize selectedTech={selectedTech} setTechnology={setTechnology} />
+            }
+        </Box>
+
+    )
+}
+
+export default Technology
+
+interface ITechnologyMobileSize {
+    selectedTech: ITechnology
+    setTechnology: (state: string) => void
+}
+
+const TechnologyMobileSize = (props: ITechnologyMobileSize) => {
+    const { selectedTech, setTechnology } = props
+    const theme = useTheme()
     const tabletSize = theme.breakpoints.up(768)
 
     return (
@@ -56,15 +89,17 @@ const Technology = () => {
                     }
                 }}>
                 <Image
-                    src={selectedTech?.image as string}
-                    alt={`svg-icon-technology`}
+                    src={selectedTech?.landscape}
+                    alt={`svg-icon-${selectedTech?.key}`}
                     fill
-                    style={{
-                        objectFit: 'cover',
-                    }}
+                    style={{ objectFit: 'cover' }}
                 />
             </Box>
-            <StyledStepper steps={technologies.map((tech) => tech.key)} setTechnology={setTechnology} />
+            <StyledStepper
+                steps={technologies.map((tech) => tech.key)}
+                orientation='horizontal'
+                setTechnology={setTechnology}
+            />
             <Stack
                 spacing={2}
                 sx={{
@@ -88,78 +123,63 @@ const Technology = () => {
                 </Typography>
             </Stack>
         </Stack>
-
     )
 }
 
-export default Technology
-
-interface IStyledStepper {
-    steps: string[]
+interface ITechnologyDesktopSize {
+    selectedTech: ITechnology
     setTechnology: (state: string) => void
 }
 
-const StyledStepper = (props: IStyledStepper) => {
-    const { steps, setTechnology } = props
-    const theme = useTheme()
-    const [activeStep, setActiveStep] = useState<number>(0)
-    const totalSteps = steps.length
-    const tabletSize = theme.breakpoints.up(768)
-
-    const handleStep = (step: number) => () => {
-        setActiveStep(step)
-        setTechnology(steps[step])
-    }
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setActiveStep((prev) => (prev + 1) % totalSteps)
-        }, 10000)
-
-        return () => clearInterval(timer)
-    }, [totalSteps])
-
-    useEffect(() => {
-        setTechnology(steps[activeStep])
-    }, [activeStep])
+const TechnologyDesktopSize = (props: ITechnologyDesktopSize) => {
+    const { selectedTech, setTechnology } = props
 
     return (
-        <Box
+        <Stack
+            spacing={4}
+            direction='row'
             sx={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mt: 4
             }}
         >
-            <Stepper
-                nonLinear
-                connector={null}
-                activeStep={activeStep}
-                sx={{
-                    '.MuiSvgIcon-root': {
-                        // '& .MuiStepIcon-text': {
-                        //     color: 'black',
-                        // },
-                        '&.MuiStepIcon-root': {
-                            width: '40px',
-                            [tabletSize]: {
-                                width: '60px'
-                            }
-                            // color: 'rgba(255, 255, 255, 0)',
-                            // '&.Mui-active': {
-                            //     color: 'space.white',
-                            // }
-                        },
-
-                    }
-                }}
+            <Stack
+                direction='row'
+                textAlign='start'
             >
-                {steps.map((label, index) => (
-                    <Step key={label}>
-                        <StepButton color="inherit" onClick={handleStep(index)} />
-                    </Step>
-                ))}
-            </Stepper>
-        </Box>
+                <StyledStepper
+                    steps={technologies.map((tech) => tech.key)}
+                    orientation='vertical'
+                    setTechnology={setTechnology}
+                />
+                <Stack spacing={1}>
+                    <Typography variant='subheading2' color='space.purple'>
+                        {'the terminology'.toUpperCase()}
+                    </Typography>
+                    <Typography variant='heading3' color='space.white'>
+                        {selectedTech?.topic.toUpperCase()}
+                    </Typography>
+                    <Typography variant='bodytext' color='space.purple'>
+                        {selectedTech?.description}
+                    </Typography>
+                </Stack>
+            </Stack>
+            <Box
+                sx={{
+                    position: 'relative',
+                    width: '100%',
+                    minHeight: '170px',
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                }}>
+                <Image
+                    src={selectedTech?.portrait}
+                    alt={`svg-icon-${selectedTech?.key}`}
+                    width={500}
+                    height={500}
+                />
+            </Box>
+        </Stack>
     )
 }

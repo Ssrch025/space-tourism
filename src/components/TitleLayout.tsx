@@ -46,6 +46,9 @@ const TitleLayout = ({ children, hasImage }: { children: React.ReactNode; hasIma
                         mt: 9,
                         mb: { xs: isDestinationPage ? 9 : 0, lg: 0 },
                         px: !hasImage ? { xs: 3, lg: 20 } : 0,
+                        [desktopSize]: {
+                            pl: { xs: 3, lg: 20 }
+                        }
                     }}
                 >
                     <Stack
