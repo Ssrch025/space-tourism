@@ -22,7 +22,7 @@ const topics = [
 ].map((item, index) => ({ order: index + 1, ...item }))
 
 
-const TitleLayout = ({ children }: { children: React.ReactNode }) => {
+const TitleLayout = ({ children, hasImage }: { children: React.ReactNode; hasImage?: boolean }) => {
     const theme = useTheme()
     const tabletSize = theme.breakpoints.up(768)
     const desktopSize = theme.breakpoints.up(1024)
@@ -45,7 +45,10 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                         alignItems: { xs: 'center', sm: 'flex-start' },
                         mt: 9,
                         mb: { xs: isDestinationPage ? 9 : 0, lg: 0 },
-                        px: { xs: 2, lg: 20 },
+                        px: !hasImage ? { xs: 3, lg: 20 } : 0,
+                        [desktopSize]: {
+                            pl: { xs: 3, lg: 20 }
+                        }
                     }}
                 >
                     <Stack
@@ -67,7 +70,7 @@ const TitleLayout = ({ children }: { children: React.ReactNode }) => {
                             {selectedMenu?.name.toUpperCase()}
                         </Typography>
                     </Stack>
-                    <Box sx={{ position: 'relative', width: '100%' }}>
+                    <Box sx={{ position: 'relative', width: '100%', overflow: 'hidden' }}>
                         {children}
                     </Box>
                 </Stack>}
