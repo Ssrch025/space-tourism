@@ -57,8 +57,16 @@ const Technology = () => {
     return (
         <Box width='100%'>
             {!isDesktopSize
-                ? <TechnologyMobileSize selectedTech={selectedTech} setTechnology={setTechnology} />
-                : <TechnologyDesktopSize selectedTech={selectedTech} setTechnology={setTechnology} />
+                ? <TechnologyMobileSize
+                    technology={technology}
+                    selectedTech={selectedTech}
+                    setTechnology={setTechnology}
+                />
+                : <TechnologyDesktopSize
+                    technology={technology}
+                    selectedTech={selectedTech}
+                    setTechnology={setTechnology}
+                />
             }
         </Box>
 
@@ -69,11 +77,12 @@ export default Technology
 
 interface ITechnologyMobileSize {
     selectedTech: ITechnology
+    technology: string
     setTechnology: (state: string) => void
 }
 
 const TechnologyMobileSize = (props: ITechnologyMobileSize) => {
-    const { selectedTech, setTechnology } = props
+    const { selectedTech, technology, setTechnology } = props
     const theme = useTheme()
     const tabletSize = theme.breakpoints.up(768)
 
@@ -97,7 +106,8 @@ const TechnologyMobileSize = (props: ITechnologyMobileSize) => {
             </Box>
             <StyledStepper
                 steps={technologies.map((tech) => tech.key)}
-                orientation='horizontal'
+                direction='row'
+                technology={technology}
                 setTechnology={setTechnology}
             />
             <Stack
@@ -128,11 +138,12 @@ const TechnologyMobileSize = (props: ITechnologyMobileSize) => {
 
 interface ITechnologyDesktopSize {
     selectedTech: ITechnology
+    technology: string
     setTechnology: (state: string) => void
 }
 
 const TechnologyDesktopSize = (props: ITechnologyDesktopSize) => {
-    const { selectedTech, setTechnology } = props
+    const { selectedTech, technology, setTechnology } = props
 
     return (
         <Stack
@@ -145,22 +156,26 @@ const TechnologyDesktopSize = (props: ITechnologyDesktopSize) => {
             }}
         >
             <Stack
-                direction='row'
-                textAlign='start'
+                sx={{
+                    flexDirection: 'row',
+                    justifyContent: 'start',
+                    alignItems: 'center',
+                }}
             >
                 <StyledStepper
                     steps={technologies.map((tech) => tech.key)}
-                    orientation='vertical'
+                    direction='column'
+                    technology={technology}
                     setTechnology={setTechnology}
                 />
                 <Stack spacing={1}>
-                    <Typography variant='subheading2' color='space.purple'>
+                    <Typography variant='navtext' color='space.purple'>
                         {'the terminology'.toUpperCase()}
                     </Typography>
                     <Typography variant='heading3' color='space.white'>
                         {selectedTech?.topic.toUpperCase()}
                     </Typography>
-                    <Typography variant='bodytext' color='space.purple'>
+                    <Typography variant='bodytext' color='space.purple' sx={{ width: '70%' }}>
                         {selectedTech?.description}
                     </Typography>
                 </Stack>
